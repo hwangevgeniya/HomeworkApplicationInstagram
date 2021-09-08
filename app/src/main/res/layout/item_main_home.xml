@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_gravity="center_horizontal"
+
+    >
+
+    <ImageView
+        android:id="@+id/ivItemLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvItemLarge"
+        tools:src="@drawable/ic_rectangle"
+
+        />
+
+    <TextView
+        android:id="@+id/tvItemLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:fontFamily="@font/acme"
+        app:layout_constraintTop_toBottomOf="@+id/ivItemLarge"
+        app:layout_constraintBottom_toTopOf="@+id/tvItemLarge2"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="18dp"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        tools:text="Example" />
+
+    <TextView
+        android:id="@+id/tvItemLarge2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:fontFamily="@font/acme"
+        app:layout_constraintTop_toBottomOf="@+id/tvItemLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="10sp"
+        tools:text="Example" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
