@@ -1,5 +1,6 @@
 package com.geektech.homeworkapplicationinstagram.ui.fragments.users;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +48,14 @@ public class UserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         createList();
         initViewPager();
+
+        binding.btnUserEdit.setOnClickListener(v->{
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+            final int ACTIVITY_SELECT_IMAGE = 1234;
+            startActivityForResult(intent,ACTIVITY_SELECT_IMAGE);
+            binding.ivUserAvatar.setImageResource(ACTIVITY_SELECT_IMAGE);
+
+        });
     }
 
     private void createList() {
