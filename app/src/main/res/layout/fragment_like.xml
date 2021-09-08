@@ -24,6 +24,7 @@
             android:fontFamily="@font/acme"
             android:textSize="16sp"
             android:gravity="center"
+            android:textColor="@color/black"
             android:text="Following" />
     </Toolbar>
 
