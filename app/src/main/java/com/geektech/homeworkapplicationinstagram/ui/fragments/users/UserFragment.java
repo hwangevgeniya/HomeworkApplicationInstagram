@@ -1,6 +1,7 @@
 package com.geektech.homeworkapplicationinstagram.ui.fragments.users;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.geektech.homeworkapplicationinstagram.R;
 import com.geektech.homeworkapplicationinstagram.data.UserImageClient;
 import com.geektech.homeworkapplicationinstagram.databinding.FragmentUserBinding;
@@ -33,8 +35,8 @@ public class UserFragment extends Fragment {
     private ViewPagerAdapter adapter;
     private FragmentUserBinding binding;
     //private TabLayout tabLayout;
-    private int[] listTL = {R.drawable.grid_icon,R.drawable.tags_icon};
-
+    private Uri uri;
+    private int[] listTL = {R.drawable.grid_icon, R.drawable.tags_icon1};
 
 
     private static final int SELECT_PICTURE = 1;
@@ -46,7 +48,7 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentUserBinding.inflate(inflater,container,false);
+        binding = FragmentUserBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
     }
@@ -57,19 +59,30 @@ public class UserFragment extends Fragment {
         createList();
         initViewPager();
 
-        binding.btnUserEdit.setOnClickListener(v->{
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-           final int ACTIVITY_SELECT_IMAGE = 1234;
-            binding.ivUserAvatar.setImageResource(R.drawable.ic_photopost2);
-            startActivityForResult(intent,ACTIVITY_SELECT_IMAGE);
-
-
+        binding.btnUserEdit.setOnClickListener(v -> {
+            Intent intent = new Intent().setAction(Intent.ACTION_PICK).setType("image/*");
+            startActivityForResult(intent, 1);
         });
 
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && data != null) {
+            uri = data.getData();
+            binding.ivUserAvatar.setImageURI(uri);
+        }
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (uri != null)
+            Glide.with(requireContext()).load(uri).circleCrop().into(binding.ivUserAvatar);
+        else binding.ivUserAvatar.setImageResource(R.drawable.ic_photo);
+    }
 
     private void createList() {
         list.add(new UserImageFragment());
@@ -84,6 +97,8 @@ public class UserFragment extends Fragment {
         new TabLayoutMediator(binding.tlUser, binding.vpUserContainer, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+
+
                 tab.setIcon(listTL[position]);
             }
         }).attach();
