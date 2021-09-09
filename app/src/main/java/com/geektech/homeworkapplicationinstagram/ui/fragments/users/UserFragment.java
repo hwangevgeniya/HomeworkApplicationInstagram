@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.geektech.homeworkapplicationinstagram.R;
 import com.geektech.homeworkapplicationinstagram.data.UserImageClient;
@@ -34,6 +35,13 @@ public class UserFragment extends Fragment {
     //private TabLayout tabLayout;
     private int[] listTL = {R.drawable.grid_icon,R.drawable.tags_icon};
 
+
+
+    private static final int SELECT_PICTURE = 1;
+    private String selectedImagePath;
+    private ImageView img;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,12 +59,17 @@ public class UserFragment extends Fragment {
 
         binding.btnUserEdit.setOnClickListener(v->{
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-            final int ACTIVITY_SELECT_IMAGE = 1234;
+           final int ACTIVITY_SELECT_IMAGE = 1234;
+            binding.ivUserAvatar.setImageResource(R.drawable.ic_photopost2);
             startActivityForResult(intent,ACTIVITY_SELECT_IMAGE);
-            binding.ivUserAvatar.setImageResource(ACTIVITY_SELECT_IMAGE);
+
 
         });
+
+
     }
+
+
 
     private void createList() {
         list.add(new UserImageFragment());
