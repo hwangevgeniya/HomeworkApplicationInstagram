@@ -34,14 +34,10 @@ public class UserFragment extends Fragment {
     private ArrayList<Fragment> list = new ArrayList<>();
     private ViewPagerAdapter adapter;
     private FragmentUserBinding binding;
-    //private TabLayout tabLayout;
+    private TabLayout tabLayout;
     private Uri uri;
     private int[] listTL = {R.drawable.grid_icon, R.drawable.tags_icon1};
 
-
-    private static final int SELECT_PICTURE = 1;
-    private String selectedImagePath;
-    private ImageView img;
 
 
     @Override
@@ -98,9 +94,28 @@ public class UserFragment extends Fragment {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
 
-
                 tab.setIcon(listTL[position]);
+
+                switch (tab.getPosition()){
+                    case 0:
+                        tab.setIcon(R.drawable.grid_icon);
+
+                        tabLayout.getTabAt(1).setIcon(R.drawable.tags_icon);
+                        break;
+
+                    case 1:
+                        tab.setIcon(R.drawable.tags_icon1);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.grid_icon1);
+
+                }
             }
+
+
         }).attach();
+
     }
+
+
+
+
 }
